@@ -8,12 +8,8 @@ include "koneksi.php";
 
 $method = $_SERVER['REQUEST_METHOD'];
 
-/* ==========================================
-   ➤ METHOD: GET (MENAMPILKAN DATA + STOK)
-   ========================================== */
 if ($method == "GET") {
 
-    // Menambahkan tb_produk.stok ke dalam query SELECT
     $sql = "SELECT tb_produk.*, tb_kategori.nama_kategori 
             FROM tb_produk 
             JOIN tb_kategori ON tb_produk.kategori_id = tb_kategori.id
@@ -39,9 +35,6 @@ if ($method == "GET") {
     ]);
 }
 
-/* ==========================================
-   ➤ METHOD: POST (TAMBAH PRODUK + STOK AWAL)
-   ========================================== */
 elseif ($method == "POST") {
 
     $nama        = isset($_POST['nama_produk']) ? mysqli_real_escape_string($conn, $_POST['nama_produk']) : '';
@@ -58,7 +51,6 @@ elseif ($method == "POST") {
         ]));
     }
 
-    // Memasukkan field 'stok' dan nilainya ke query INSERT
     $sql = "INSERT INTO tb_produk (nama_produk, harga_produk, stok, deskripsi, gambar, kategori_id)
             VALUES ('$nama', '$harga', '$stok', '$deskripsi', '$gambar', '$kategori_id')";
             
@@ -70,9 +62,6 @@ elseif ($method == "POST") {
     ]);
 }
 
-/* ==========================================
-   ➤ METHOD: PUT (UPDATE PRODUK + STOK)
-   ========================================== */
 elseif ($method == "PUT") {
 
     parse_str(file_get_contents("php://input"), $_PUT);
@@ -90,7 +79,6 @@ elseif ($method == "PUT") {
         ]));
     }
 
-    // Menambahkan field stok='$stok' ke dalam klausa UPDATE
     $sql = "UPDATE tb_produk SET 
             nama_produk='$nama',
             harga_produk='$harga',
@@ -106,9 +94,6 @@ elseif ($method == "PUT") {
     ]);
 }
 
-/* ==========================================
-   ➤ METHOD: DELETE (HAPUS PRODUK)
-   ========================================== */
 elseif ($method == "DELETE") {
 
     parse_str(file_get_contents("php://input"), $_DELETE);
