@@ -2,7 +2,6 @@
 header("Content-Type: application/json");
 include "koneksi.php";
 
-// Mengubah dari 'admin' menjadi 'tb_admin'
 $query = mysqli_query($conn, "SELECT id, username FROM tb_admin");
 
 if (!$query) {
