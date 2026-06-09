@@ -8,11 +8,7 @@ include "koneksi.php";
 
 $method = $_SERVER['REQUEST_METHOD'];
 
-/* ==========================================
-   ➤ METHOD: GET (MENAMPILKAN BARANG KELUAR)
-   ========================================== */
 if ($method == "GET") {
-    // JOIN dengan tb_produk untuk mendapatkan nama_produk
     $sql = "SELECT bk.id, bk.produk_id, p.nama_produk, bk.jumlah, bk.tanggal, bk.tujuan 
             FROM tb_barang_keluar bk
             JOIN tb_produk p ON bk.produk_id = p.id
@@ -38,9 +34,6 @@ if ($method == "GET") {
     ]);
 }
 
-/* ==========================================
-   ➤ METHOD: POST (TAMBAH BARANG KELUAR)
-   ========================================== */
 elseif ($method == "POST") {
     $produk_id = isset($_POST['produk_id']) ? mysqli_real_escape_string($conn, $_POST['produk_id']) : '';
     $jumlah    = isset($_POST['jumlah']) ? mysqli_real_escape_string($conn, $_POST['jumlah']) : '';
