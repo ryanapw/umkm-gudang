@@ -4,10 +4,8 @@ include "koneksi.php";
 
 $method = $_SERVER['REQUEST_METHOD'];
 
-/* ➤ METHOD: GET (TAMPILKAN KATEGORI) */
 if ($method == "GET") {
 
-    // Mengubah dari 'kategori' menjadi 'tb_kategori'
     $query = mysqli_query($conn, "SELECT * FROM tb_kategori");
     
     if (!$query) {
@@ -27,7 +25,6 @@ if ($method == "GET") {
         "data" => $data
     ]);
 
-/* ➤ METHOD: POST (TAMBAH KATEGORI) */
 } elseif ($method == "POST") {
 
     $nama = isset($_POST['nama_kategori']) ? mysqli_real_escape_string($conn, $_POST['nama_kategori']) : '';
@@ -39,7 +36,6 @@ if ($method == "GET") {
         ]));
     }
 
-    // Mengubah dari 'kategori' menjadi 'tb_kategori'
     $query = mysqli_query($conn, "INSERT INTO tb_kategori (nama_kategori) VALUES ('$nama')");
 
     echo json_encode([
